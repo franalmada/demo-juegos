@@ -333,9 +333,13 @@ function endGame(message, showParticles = true) {
             speedY: { min: 100, max: 200 }, speedX: { min: -100, max: 100 },
             scale: { start: 0.5, end: 0 }, lifespan: 1500, quantity: 5, frequency: 200, blendMode: 'ADD'
         });
-        setTimeout(() => { emitter.stop(); confetti.destroy(); window.location.href = "perfil.html"; }, 5000);
+setTimeout(() => { 
+    emitter.stop(); 
+    confetti.destroy(); 
+    window.location.href = "index.html"; 
+}, 5000);
     } else {
-        setTimeout(() => window.location.href = "perfil.html", 5000);
+setTimeout(() => window.location.href = "index.html", 5000);
     }
 }
 
@@ -350,4 +354,5 @@ function update() {
         }
     });
 }
+
 
