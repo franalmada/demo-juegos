@@ -382,7 +382,7 @@ function endGame(message) {
     }
 
     // ⏳ Aumentar el tiempo antes de redirigir (5s en lugar de 3s)
-    setTimeout(() => window.location.href = "perfil.html", 5000);
+setTimeout(() => window.location.href = "index.html", 5000);
 }
 
 function update() {
@@ -427,3 +427,4 @@ async function saveScore(game, score, nivel, timePlayed) {
     }
 
 }
+
