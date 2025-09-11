@@ -129,7 +129,8 @@ function create() {
                 timeLeft -= 1;
                 timerText.setText(`Tiempo: ${timeLeft}`);
             } else {
-                endGame.call(this, '¡Casi lo logras! Inténtalo de nuevo.');
+// Cambiar la llamada cuando se termina por tiempo
+endGame.call(this, '¡Casi lo logras! Inténtalo de nuevo.', false);
             }
         },
         loop: true,
@@ -170,7 +171,7 @@ async function fetchDifficultySettings() {
 async function generateOperation(scene) {
     if (currentQuestion >= maxQuestions) {
         level -= 1; // 🔥 Ajustamos el nivel antes de guardar si ya está en el final
-        endGame.call(scene, `¡Juego terminado! Puntaje final: ${score}`);
+endGame.call(this, `¡Juego terminado! Puntaje final: ${score}`, true);
         return;
     }
     
@@ -315,30 +316,31 @@ bee.on('pointerdown', () => {
     operationText.setText(`${num1} × ${num2} = ?`);
 }
 
-function endGame(message) {
-    if (level > 10) level = 10; // 🔥 Evita que se guarde el nivel 11
+function endGame(message, showStars = true) {
+    // Evita que se guarde un nivel superior a 10
+    if (level > 10) level = 10;
+
     const timePlayed = Math.floor((Date.now() - startTime) / 1000);
     saveScore("Abejas", score, level, timePlayed);
 
-
     // Crear un fondo semitransparente para resaltar el mensaje
     const overlay = this.add.graphics();
-    overlay.fillStyle(0x000000, 0.6); // Negro con opacidad
+    overlay.fillStyle(0x000000, 0.6);
     overlay.fillRect(0, 0, this.scale.width, this.scale.height);
 
-    // Crear el texto de felicitaciones con mejor diseño
+    // Crear el texto de finalización con diseño
     const endText = this.add.text(this.scale.width / 2, this.scale.height / 2 - 50, message, {
         fontSize: '4vw',
-        color: '#FFD700', // Dorado brillante
+        color: '#FFD700',
         fontStyle: 'bold',
         align: 'center',
-        stroke: '#8B0000', // Contorno rojo oscuro
+        stroke: '#8B0000',
         strokeThickness: 6,
         shadow: { offsetX: 4, offsetY: 4, color: '#000', blur: 5, fill: true },
         wordWrap: { width: this.scale.width * 0.8 }
     }).setOrigin(0.5).setScale(0);
 
-    // Animación de aparición del texto con efecto de escala
+    // Animación de aparición
     this.tweens.add({
         targets: endText,
         scale: 1,
@@ -346,7 +348,7 @@ function endGame(message) {
         ease: 'Back.Out',
     });
 
-    // Efecto de parpadeo suave para el texto
+    // Parpadeo suave
     this.tweens.add({
         targets: endText,
         alpha: { start: 1, to: 0.5 },
@@ -355,34 +357,29 @@ function endGame(message) {
         repeat: -1
     });
 
-    // Verificar que la imagen 'star' está cargada
-    if (this.textures.exists('star')) {
+    // Mostrar estrellas solo si showStars es true
+    if (showStars && this.textures.exists('star')) {
         const confetti = this.add.particles('star');
-
         const emitter = confetti.createEmitter({
             x: { min: 0, max: this.scale.width },
             y: 0,
-            speedY: { min: 100, max: 200 }, // Menos velocidad para evitar acumulación rápida
-            speedX: { min: -100, max: 100 }, // Rango de movimiento más equilibrado
-            scale: { start: 0.5, end: 0 }, // Tamaño inicial más pequeño para evitar saturación
-            lifespan: 1500, // Menor duración para que desaparezcan antes de acumularse
-            quantity: 5, // Reducimos la cantidad para evitar sobrecarga visual
-            frequency: 200, // Disminuir la frecuencia de emisión
-            blendMode: 'ADD' // Hace que las estrellas se vean más suaves y brillantes
+            speedY: { min: 100, max: 200 },
+            speedX: { min: -100, max: 100 },
+            scale: { start: 0.5, end: 0 },
+            lifespan: 1500,
+            quantity: 5,
+            frequency: 200,
+            blendMode: 'ADD'
         });
-        
 
-        // Detener el emisor después de unos segundos para evitar acumulación
-        this.time.delayedCall(4000, () => {
-            emitter.stop();
-        });
-    } else {
-        console.warn("⚠️ La textura 'star' no está cargada, revisa preload()");
+        // Detener el emisor después de unos segundos
+        this.time.delayedCall(4000, () => emitter.stop());
     }
 
-    // ⏳ Aumentar el tiempo antes de redirigir (5s en lugar de 3s)
-setTimeout(() => window.location.href = "index.html", 5000);
+    // Redirigir después de 5 segundos
+    setTimeout(() => window.location.href = "index.html", 5000);
 }
+
 
 function update() {
     bees.getChildren().forEach((bee) => {
@@ -426,4 +423,5 @@ async function saveScore(game, score, nivel, timePlayed) {
     }
 
 }
+
 
