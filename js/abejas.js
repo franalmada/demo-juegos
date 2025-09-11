@@ -118,7 +118,6 @@ function create() {
         });
         
 
-    particles = this.add.particles('star');
     bees = this.physics.add.group();
 
     generateOperation(this);
@@ -427,3 +426,4 @@ async function saveScore(game, score, nivel, timePlayed) {
     }
 
 }
+
