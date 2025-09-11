@@ -42,10 +42,11 @@ let operationsRemaining = 10; // Contador de operaciones restantes
 
 
 function preload() {
-    this.load.image('platform', '../assets/platform.png');
-    this.load.image('character', '../assets/character.png');
-    this.load.image('star', '../assets/star.png');
+    this.load.image('platform', 'assets/platform.png');
+    this.load.image('character', 'assets/character.png');
+    this.load.image('star', 'assets/star.png');
 }
+
 
 
 
@@ -511,4 +512,5 @@ async function saveScore(game, score, nivel, timePlayed) {
     } catch (error) {
         console.error("❌ Error en la solicitud de guardado:", error);
     }
+
 }
