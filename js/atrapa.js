@@ -52,9 +52,9 @@ let difficultySettings = { min: 1, max: 10 }; // Valor predeterminado
 // 4. Carga de assets
 // ========================
 function preload() {
-    this.load.image('background', '../assets/background.png');
-    this.load.image('balloon', '../assets/balloon.png');
-    this.load.image('star', '../assets/star.png');
+this.load.image('background', 'assets/background.png');
+this.load.image('balloon', 'assets/balloon.png');
+this.load.image('star', 'assets/star.png');
 }
 
 // ========================
@@ -350,3 +350,4 @@ function update() {
         }
     });
 }
+
