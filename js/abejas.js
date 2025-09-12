@@ -43,10 +43,10 @@ let maxQuestions = 10;
 let currentQuestion = 0;
 
 function preload() {
-    this.load.image('hive', '../assets/hive.png');
-    this.load.image('bee', '../assets/bee.png');
-    this.load.image('star', '../assets/star.png');
-    this.load.image('background', '../assets/flower_field.png');
+    this.load.image('hive', 'assets/hive.png');
+    this.load.image('bee', 'assets/bee.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('background', 'assets/flower_field.png');
 }
 
 function create() {
@@ -425,3 +425,4 @@ async function saveScore(game, score, nivel, timePlayed) {
         console.error("❌ Error en la solicitud de guardado:", error);
     }
 }
+
