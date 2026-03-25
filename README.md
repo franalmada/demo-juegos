@@ -53,3 +53,5 @@ Como **Licenciado en Sistemas**, diseñé un esquema relacional normalizado para
 * **UUIDs:** Identificadores únicos y seguros para cada registro.
 * **Relaciones:** Estructura vinculada entre Usuarios, Sesiones de Juego (Scores) y Dificultad.
 
+### 🌐 Prueba la aplicación:
+[![Live Demo](https://img.shields.io/badge/DEMO-Ver_Proyecto_En_Vivo-007bff?style=for-the-badge&logo=google-chrome&logoColor=white)](https://franalmada.github.io/demo-juegos/)
